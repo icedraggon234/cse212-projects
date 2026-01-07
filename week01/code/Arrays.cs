@@ -13,7 +13,17 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Declare result array with length equal to length parameter
+        double[] result = new double[length];
+
+        // Loop length amount of times with an increasing variable that is multiplied by the starting number then added to the result array
+        for (int i = 1; i <= length; i++)
+        {
+            result[i-1] = i * number;
+        }
+
+
+        return result; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +39,14 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Grab and remove section of data list to be moved to the front based on amount
+        List<int> movedData = data.GetRange(data.Count - amount, amount);
+        data.RemoveRange(data.Count - amount, amount);
+
+        // Place grabed section of list at beginning of data list
+        data.InsertRange(0, movedData);
+
+        
     }
 }
