@@ -11,18 +11,35 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Normal operation creating a queue, adding customers, and servicing them like normal.
+        // Expected Result: No unusual errors for normal operation
         Console.WriteLine("Test 1");
 
-        // Defect(s) Found: 
+        var cstest1 = new CustomerService(4);
+        cstest1.AddNewCustomer();
+        Console.WriteLine();
+        cstest1.AddNewCustomer();
+        Console.WriteLine();
+        cstest1.ServeCustomer();
+        Console.WriteLine();
+        cstest1.AddNewCustomer();
+
+        Console.WriteLine($"\n{cstest1}\n");
+
+
+        // Defect(s) Found: ServeCustomer() seems to remove from the queue before displaying them.
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Making a queue with size 0, and servicing empty queue.
+        // Expected Result: A queue with max size 10, and an error message when attempting to serve empty queue.
         Console.WriteLine("Test 2");
+
+        var cstest2 = new CustomerService(0);
+        cstest2.ServeCustomer();
+        
+        Console.WriteLine($"\n{cstest2}\n");
 
         // Defect(s) Found: 
 
@@ -88,8 +105,13 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
+        if (_queue.Count <= 0)
+        {
+            Console.WriteLine("Queue is empty");
+            return;
+        }
         var customer = _queue[0];
+        _queue.RemoveAt(0);
         Console.WriteLine(customer);
     }
 
